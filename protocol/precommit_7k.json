@@ -1,0 +1,107 @@
+{
+  "data_precommit": "2026-08-17 22:13",
+  "arms": {
+    "LBP": {
+      "desc": "LBP54",
+      "transform": null,
+      "origem": "semana2"
+    },
+    "LBP-H": {
+      "desc": "LBP54",
+      "transform": "hellinger",
+      "origem": "semana2"
+    },
+    "LBP-HF-H": {
+      "desc": "LBPHF",
+      "transform": "hellinger",
+      "origem": "semana56"
+    },
+    "LBP-COR-H": {
+      "desc": "LBPCOR",
+      "transform": "hellinger",
+      "origem": "semana56"
+    },
+    "LBP-ENR": {
+      "desc": "LBPHF+LBPCOR",
+      "transform": "hellinger_pre",
+      "origem": "semana56"
+    },
+    "Fractal": {
+      "desc": "FRACTALV1",
+      "transform": null,
+      "origem": "semana2"
+    },
+    "Fractal-BM": {
+      "desc": "FRACTALBM",
+      "transform": null,
+      "origem": "semana56"
+    },
+    "CLASSICO-MAX": {
+      "desc": "LBPHF+LBPCOR+FRACTALBM",
+      "transform": "hellinger_pre",
+      "origem": "semana56"
+    },
+    "Phikon": {
+      "desc": "PHIKON",
+      "transform": null,
+      "origem": "gate"
+    },
+    "SimCLR_s0": {
+      "desc": "SIMCLR_s0_full",
+      "transform": null,
+      "origem": "semanas34"
+    },
+    "SimCLR_s1": {
+      "desc": "SIMCLR_s1_full",
+      "transform": null,
+      "origem": "semanas34"
+    },
+    "SimCLR_s2": {
+      "desc": "SIMCLR_s2_full",
+      "transform": null,
+      "origem": "semanas34"
+    },
+    "SimCLR_abl_s0": {
+      "desc": "SIMCLR_s0_ablated_no_scale_color",
+      "transform": null,
+      "origem": "semanas34"
+    },
+    "SimCLR_abl_s1": {
+      "desc": "SIMCLR_s1_ablated_no_scale_color",
+      "transform": null,
+      "origem": "semanas34"
+    }
+  },
+  "classico_manchete": "LBP-COR-H",
+  "ssl_manchete": "SimCLR_s0",
+  "condicoes": [
+    "RAW",
+    "PCA32"
+  ],
+  "fracoes": [
+    0.01,
+    0.05,
+    0.1,
+    0.25,
+    1.0
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "probe": "StandardScaler+LogisticRegression(max_iter=2000, class_weight=balanced)",
+  "pca": "Pipeline(sc->PCA(d)->sc->logreg), fit so no fold de treino, refeito por (frac,seed)",
+  "treino": "subamostra estratificada de idx_train_pool (80k) do NCT-100K",
+  "teste": "CRC-VAL-HE-7K inteiro, ordem canonica",
+  "metricas": [
+    "balanced_accuracy",
+    "f1_macro",
+    "recall_por_classe",
+    "matriz_confusao"
+  ],
+  "estatistica": "diferenca pareada + IC bootstrap estratificado sobre o teste (B=2000) + Holm",
+  "spec_hash": "df4b2937407f9b87"
+}
